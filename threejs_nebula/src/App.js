@@ -28,6 +28,16 @@ function App() {
 
   directionalLight.position.set(0, 3, 0.5);
   scene.add(directionalLight);
+  // renderer startup
+  renderer = new WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // addition of fog
+  scene.fog = new FogExp2(0x03544e, 0.001);
+  renderer.setClearColor(scene.fog.color);
+  // add the renderer.domElement to body
+  document.body.appendChild(renderer.domElement); // LOOK INTO THIS. THERE MUST BE ANOTHER WAY
+
   return null;
 }
 
