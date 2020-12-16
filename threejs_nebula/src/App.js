@@ -57,6 +57,34 @@ function App() {
   // add the renderer.domElement to body
   document.body.appendChild(renderer.domElement); // LOOK INTO THIS. THERE MUST BE ANOTHER WAY
 
+  // Loader to load in images/textures. cloud png in this case
+  let loader = new TextureLoader();
+  loader.load(smoke, function (texture) {
+    let cloudGeo = new PlaneBufferGeometry(500, 500);
+    let cloudMaterial = new MeshLambertMaterial({
+      map: texture,
+      DirectionalLight,
+      transparent: true
+    });
+    // Make 100 clouds placed randomly into cloudParticles
+    for (let p = 0; p < 100; p++) {
+      let cloud = new Mesh(cloudGeo, cloudMaterial);
+      cloud.position.set(
+        Math.random() * 800 - 400,
+        500,
+        Math.random() * 500 - 500
+      );
+      // Same rotations as above to not expose the edges of the cloud image
+      cloud.rotation.x = 1.16;
+      cloud.rotation.y = -0.12;
+      cloud.rotation.z = Math.random() * 2 * Math.PI;
+      cloud.material.opacity = 0.55;
+      cloudParticles.push(cloud);
+      // Add each cloud to the scene.
+      scene.add(cloud);
+    }
+  });
+
   return null;
 }
 
