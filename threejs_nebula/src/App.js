@@ -34,7 +34,6 @@ function App() {
     // far clipping plane
     1000
   );
-  
   // Where the camera is located
   camera.position.z = 10;
 
