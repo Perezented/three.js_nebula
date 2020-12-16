@@ -38,6 +38,11 @@ function App() {
   // Where the camera is located
   camera.position.z = 10;
 
+  // How much in which direction the camera moves
+  camera.rotation.x = 1.16;
+  camera.rotation.y = -0.12;
+  camera.rotation.z = 0.1;
+
   // Ambient light setup
   let ambient = new AmbientLight(0x000000);
   // Add abient to scene
