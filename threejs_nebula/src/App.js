@@ -90,6 +90,47 @@ function App() {
     }
   });
 
+  // Used to load in the space background image
+  loader.load(spaceImg, function (texture) {
+    const textureEffect = new POSTPROCESSING.TextureEffect({
+      blendFunction: POSTPROCESSING.BlendFunction.COLOR_DODGE,
+      texture: texture
+    });
+
+    textureEffect.blendMode.opacity.value = 0.25;
+
+    // Post processing
+    const bloomEffect = new POSTPROCESSING.BloomEffect({
+      blendFunction: POSTPROCESSING.BlendFunction.COLOR_DODGE,
+      kernelSize: POSTPROCESSING.KernelSize.SMALL,
+      useLuminanceFilter: true,
+      luminanceThreshold: 0.3,
+      luminanceSmoothing: 0.75
+    });
+    bloomEffect.blendMode.opacity.value = 0.75;
+
+    let effectPass = new POSTPROCESSING.EffectPass(
+      camera,
+      bloomEffect,
+      textureEffect
+    );
+    effectPass.renderToScreen = true;
+    composer = new POSTPROCESSING.EffectComposer(renderer);
+    // use composer instead of renderer now
+    composer.addPass(new POSTPROCESSING.RenderPass(scene, camera));
+    composer.addPass(effectPass);
+
+    // animate function
+    render();
+    function render() {
+      cloudParticles.forEach((value) => {
+        value.rotation.z -= 0.005;
+      });
+      composer.render(0.1);
+      requestAnimationFrame(render);
+    }
+  });
+
   return null;
 }
 
