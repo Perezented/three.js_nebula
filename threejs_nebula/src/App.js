@@ -19,6 +19,15 @@ function App() {
   // Where the camera is located
   camera.position.z = 10;
 
+  // Ambient light setup
+  let ambient = new AmbientLight(0x000000);
+  // Add abient to scene
+  scene.add(ambient);
+
+  let directionalLight = new DirectionalLight(0xff8c19);
+
+  directionalLight.position.set(0, 3, 0.5);
+  scene.add(directionalLight);
   return null;
 }
 
