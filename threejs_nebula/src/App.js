@@ -52,6 +52,19 @@ function App() {
 
   directionalLight.position.set(0, 3, 0.5);
   scene.add(directionalLight);
+  // setup of orange light
+  let orangeLight = new PointLight(0xdddaaa, 50, 450, 1.7);
+  orangeLight.position.set(50, 300, 100);
+  // setup of red light
+  let redLight = new PointLight(0xd6667e, 50, 450, 1.7);
+  redLight.position.set(200, 300, 100);
+  // setup of blue light
+  let blueLight = new PointLight(0x3677ac, 50, 450, 1.7);
+  blueLight.position.set(350, 300, 200);
+
+  scene.add(orangeLight);
+  scene.add(redLight);
+  scene.add(blueLight);
   // renderer startup
   renderer = new WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
