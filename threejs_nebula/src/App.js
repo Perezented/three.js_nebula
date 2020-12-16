@@ -1,8 +1,27 @@
 import "./App.css";
 import {
+  Scene,
+  PerspectiveCamera,
+  AmbientLight,
+  WebGLRenderer,
+  FogExp2,
+  TextureLoader,
+  PlaneBufferGeometry,
+  MeshLambertMaterial,
+  Mesh,
+  DirectionalLight,
+  PointLight
+} from "three";
+import * as POSTPROCESSING from "postprocessing";
+import smoke from "./smoke.png";
+import spaceImg from "./jeremy-thomas-E0AHdsENmDg-unsplash.jpg";
 function App() {
   // Set up, main points: SCENE CAMERA RENDERER
-  let scene, camera, renderer;
+  let scene,
+    camera,
+    renderer,
+    cloudParticles = [],
+    composer;
   // Make a new scene and camera
   scene = new Scene();
   camera = new PerspectiveCamera(
